@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Сайт</title>
+        
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">        
+        <link rel="stylesheet" href="../clock.css">
+        <link rel="stylesheet" href="example.css">
+        
+        <script src="../jquery-1.8.3.min.js"></script>
+        <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        
+        <!--script src="..js/jquery.clock.min.js"></script-->
+        <script src="../jquery.clock.js"></script>
+        <script src="example.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <section class="ex ex__1" id="ex__1">
+                <h1>Обычные часы с заданой временной зоной</h1>
+                <span class="clock" data-timezone="4"></span><br>
+                <span class="clock" data-timezone="4" data-s-rndr-tpl="hh;:;min"></span><br><br>
+                <select>
+                    <option value="4">Moscow UTC+04:00</option>
+                    <option value="6">Yekaterinburg UTC+06:00</option>
+                    <option value="7">Omsk UTC+07:00</option>
+                    <option value="8">Krasnoyarsk UTC+08:00</option>
+                    <option value="9">Irkutsk UTC+09:00</option>
+                    <option value="10">Yakutsk UTC+10:00</option>
+                    <option value="11">Vladivostok UTC+11:00</option>
+                    <option value="12">Magadan UTC+12:00</option>
+                </select>
+<pre><code>/*HTML*/
+&lt;span id="clock" data-timezone="4" data-s-rndr-tpl="hh;:;min"&gt;
+&lt;/span&gt;
+</code></pre>
+<pre><code class="javascript">/*javaScript*/
+$('#clock').clock();
+</code></pre>
+                
+            </section>
+            
+            <section class="ex ex__2" id="ex__2">
+                <h1>Таймер:</h1>
+                <span class="clock" data-time-dif="120" data-direction="down" data-timer="true" data-s-rndr-tpl="min;:;ss" data-auto-start="false"></span><br>
+                <button class="clock_init">создать</button>
+                <button class="clock_pause">пауза</button>
+                <button class="clock_play">плей</button>
+                <button class="clock_stop">конец</button>
+                <button class="clock_destroy">удалить</button>
+                <button class="clock_destroy-html">удалить HTML</button><br><br>
+                <!--textarea name="" id="clock_log" cols="30" rows="5"></textarea-->
+<pre><code>/*HTML*/
+&lt;span data-time-dif="120" data-direction="down" data-timer="true"
+data-s-rndr-tpl="min;:;ss" data-auto-start="false"&gt;&lt;/span&gt;
+</code></pre>
+<pre><code class="javascript">/*javaScript*/
+$('#clock').clock({
+    onCreate : function(){console.log()},
+    btns : {play: $('.clock_play')}
+);
+$('.clock_destroy-html').on('click', function(){
+    $('#clock').clock('destroyHTML');
+});
+</code></pre>
+            </section>
+            
+            <section class="ex ex__3" id="ex__3">
+                <h1>Получение остатка времени:</h1>
+                <span class="clock" data-time-dif="60" data-direction="down" data-timer="true" data-s-rndr-tpl="min;:;ss" data-auto-start="false"></span><br>
+                <button class="clock_init">создать</button>
+                <button class="clock_play">плей</button>
+                <button class="clock_stop">конец</button>
+                <button class="clock_destroy">удалить</button>
+                <button class="clock_surplus">получить остаток</button>
+                <h2>остаток - <span class="surplus"></span></h2>
+<pre><code>/*HTML*/
+&lt;span id="clock" data-time-dif="60" data-direction="down" 
+data-timer="true" data-s-rndr-tpl="min;:;ss" 
+data-auto-start="false"&gt;
+&lt;/span&gt;
+</code></pre>
+<pre><code class="javascript">/*javaScript*/
+$('#clock').clock({
+    onStop : function(e,surplus){$('.surplus').html(surplus); }
+);
+$('.clock_surplus').on('click', function(){
+    $('.surplus').html($('#clock').data('clock').getSurplus());
+});
+</code></pre>
+            </section>
+            
+            <section class="ex ex__4" id="ex__4">
+                <div class="scroll">
+                    <div class="generator" id="generator">
+                        <form>
+                            <fieldset>
+                                <legend>Основные опции</legend>
+                                <div class="col-left">
+                                    <label >
+                                        jQuery объект - <input type="text" name="elem" value="" placeholder="$('.clock')" />
+                                    </label><br>
+                                    <label >
+                                        Часовой пояс - <input type="text" name="timeZone" value="" placeholder="4" />
+                                    </label><br>
+                                    <label >
+                                        Автозапуск при создании - <input type="checkbox" name="autoStart" value="true" placeholder="true" />
+                                    </label><br>
+                                    <label >
+                                        Режим таймера - <input type="checkbox" name="timer" value="true" />
+                                    </label><br>
+                                    <label >
+                                        Направление donw/up - <input type="text" name="direction" value="" placeholder="donw" />
+                                    </label><br>
+                                </div>
+                                <div class="col-right">
+                                    <label >
+                                        Разница во времени - <input type="text" name="timeDif" value="" placeholder="120" />
+                                    </label><br>
+                                    <label >
+                                        Шаблон рендера - <input type="text" name="sRndrTpl" value="" placeholder="dd.mm.yy hh:min:ss" />
+                                    </label><br>
+                                    <label >
+                                        Тип рендера (num/img) - <input type="text" name="renderType" value="" placeholder="num" />
+                                    </label><br>
+                                    <label >
+                                        Высота кадра спрайта - <input type="text" name="frameHeight" value="" placeholder="32" />
+                                    </label>
+                                    <label >
+                                        Свой рендер - <input type="checkbox" name="render" value="true" />
+                                    </label><br>
+                                </div>
+                            </fieldset>
+                            <div class="col-left">
+    <pre><code class="javascript">
+    </code></pre>
+                            </div>
+                            <div class="col-right">
+                                <fieldset>
+                                    <legend>Кнопки</legend>
+                                    <label >
+                                        Play - <input type="text" name="play" value="" placeholder="$('.clock_play')" />
+                                    </label><br>
+                                    <label >
+                                        Pause - <input type="text" name="pause" value="" placeholder="$('.clock_pause')" />
+                                    </label><br>
+                                    <label >
+                                        End - <input type="text" name="end" value="" placeholder="$('.clock_stop')" />
+                                    </label><br>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>События</legend>
+                                    <div class="col-left">
+                                        <label >
+                                            onStop - <input type="checkbox" name="onStop" value="false" />
+                                        </label><br>
+                                        <label >
+                                            onStep - <input type="checkbox" name="onStep" value="false" />
+                                        </label><br>
+                                        <label >
+                                            onCreate - <input type="checkbox" name="onCreate" value="false" />
+                                        </label><br>
+                                        <label >
+                                            onPlay - <input type="checkbox" name="onPlay" value="false" />
+                                        </label><br>
+                                    </div>
+                                    <div class="col-right">
+                                        <label >
+                                            onPause - <input type="checkbox" name="onPause" value="false" />
+                                        </label><br><label >
+                                            onDestroy - <input type="checkbox" name="onDestroy" value="false" />
+                                        </label><br>
+                                        <label >
+                                            onDestroyHTML - <input type="checkbox" name="onDestroyHTML" value="false" />
+                                        </label>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Тип кода</legend>
+                                    <label >
+                                        HTML5 - <input type="radio" name="type" value="html5" />
+                                    </label>
+                                    <label >
+                                        JS - <input type="radio" name="type" value="js" checked/>
+                                    </label>
+                                 </fieldset>   
+    <pre><code class="xml">
+    </code></pre>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="ex ex__5" id="ex__5">
+                <div class="scroll">
+                    <h1>Документация</h1>
+                    <h2>Создание объекта</h2>
+<pre><code class="javascript">var clock = new Clock({elen: $('#clock')});
+$('#clock').clock();
+</code></pre>
+                    <h2>Параметры</h2>
+<pre><code class="javascript">{
+    elem        : $('#clock') /*jQuery объект (только для new)*/
+    timeZone    : 4,          /*Часовой пояс*/
+    autoStart   : true,       /*Автозапуск при создании*/
+    timer       : true,       /*Режим таймера*/
+    direction   : "donw",     /*Направление отсчета donw/up*/
+    timeDif     : 120,        /*Разница во времени в секундах*/
+    sRndrTpl    : "hh;:;min", /*Шаблон рендера*/
+    renderType  : "num",      /*Тип рендера num/img*/
+    frameHeight : 32,         /*Высота кадра спрайта*/
+    btns : {
+        play    : $('#clock_play'), /*jQuery объект кнопки play*/
+        pause   : $('#clock_pause'),/*jQuery объект кнопки pause*/
+        stop    : $('#clock_stop')  /*jQuery объект кнопки stop*/
+    }
+}
+</code></pre>
+    
+                    <h2>Методы</h2>
+<pre><code class="javascript">    play();         //запускае часы
+    pause();        //ставит часы на паузу
+    stop();         //останавливает часы
+    getSurplus();   //возвращает остаток времени
+    destroy();      //удаляет часы
+    destroyHTML();  //удаляет часы и html
+</code></pre>
+                    <h2>Вызов методов</h2>
+<pre><code class="javascript">    $('#clock').clock('destroy');   //возращается $('#clock')
+    $('#clock').clock('getSurplus');
+    //вернет $('#clock') вместо числа
+    $('#clock').data('clock').getSurplus();
+    /*можно вызвать метод через событие*/
+    $('#clock').trigger('clock.play');
+    $('#clock').trigger('clock.pause');
+    $('#clock').trigger('clock.stop');
+    $('#clock').trigger('clock.destroy');
+    $('#clock').trigger('clock.destroyHTML');
+</code></pre>
+                    <h2>Колбеки</h2>
+<pre><code class="javascript">{
+    onCreate : function(){},     //при создании
+    onPlay : function(){},       //при запуске
+    onStep : function(){},       //на каждом шаге
+    onPause : function(){},      //при паузе    
+    onStop : function(surplus){}, //при стопе
+    onDestroy : function(){},    //при удалении
+    onDestroyHTML : function(){} //при удалении с html
+}
+</code></pre>
+                    <h2>События</h2>
+<p>Можно подписаться на события, если вы не передаете колбек.</p>
+<pre><code class="javascript">
+$('#clock').on('clock.onStop', function(e,surplus){
+    console.log(surplus);
+});
+</code></pre>
+                    <h2>Рендер</h2>
+<p>Можно передать свой рендер, который будет вызываться каждую секунду.<br>В качестве параметра передается текущая дата.</p>
+<pre><code class="javascript">{
+    render : function(data){},  //функция рендера
+}
+</code></pre>
+                </div>
+            </section>
+            
+            <section class="ex ex__6" id="ex__6">
+                <h1>Рендер со спрайтом</h1>
+                <span class="clock" 
+                    data-time-dif="5000" 
+                    data-direction="down" 
+                    data-timer="true"
+                    data-render-type="img" 
+                    data-auto-start="false"
+                    data-s-rndr-tpl="hh;:;min;:;ss"
+                    >
+                </span>
+                <span class="clock" 
+                    data-time-dif="5000" 
+                    data-direction="up" 
+                    data-timer="true"
+                    data-render-type="img" 
+                    data-auto-start="false"
+                    data-s-rndr-tpl="hh;:;min;:;ss"
+                    >
+                </span><br>
+                <button class="clock_pause">пауза</button>
+                <button class="clock_play">плей</button>
+                <button class="clock_stop">конец</button>
+<pre><code>/*HTML*/
+&lt;span id="clock" 
+    data-time-dif="5000" 
+    data-direction="down" 
+    data-timer="true"
+    data-render-type="img" 
+    data-auto-start="false"
+    data-s-rndr-tpl="hh;:;min;:;ss"&gt;
+&lt;/span&gt;
+</code></pre>
+<pre><code class="javascript">/*javaScript*/
+$('#clock').clock();
+</code></pre>
+                
+            </section>
+            
+            <section class="ex ex__7" id="ex__7">
+                
+            </section>
+            
+            <section class="ex ex__8" id="ex__8">
+                
+            </section>
+            
+            <section class="ex ex__9" id="ex__9">
+                
+            </section>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+.clock_rndr{
+    display: inline-block;
+}
+.clock_rndr-delim{
+    display: inline;
+}
+.clock_rndr-dig{
+    display: inline-block;
+}
+
+.clock_rndr-dig__img{
+    display: inline-block;
+    width: 14px;
+    height: 32px;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+}
+.clock_rndrimg-dig-set{
+    width: 14px;
+    height: 320px;
+}
+.clock_rndrimg-dig-set__down{
+    position: absolute;
+    bottom: 0;
+}
+.clock_rndrimg-dig-set-item{
+    background: url('dig.png') no-repeat left top;
+    width: 14px;
+    height: 32px;
+}
+
+.clock_rndrimg-dig-0{
+    background-position: left top;
+}
+.clock_rndrimg-dig-1{
+    background-position: left -32px;
+}
+.clock_rndrimg-dig-2{
+    background-position: left -64px;
+}
+.clock_rndrimg-dig-3{
+    background-position: left -96px;
+}
+.clock_rndrimg-dig-4{
+    background-position: left -128px;
+}
+.clock_rndrimg-dig-5{
+    background-position: left -160px;
+}
+.clock_rndrimg-dig-6{
+    background-position: left -192px;
+}
+.clock_rndrimg-dig-7{
+    background-position: left -224px;
+}
+.clock_rndrimg-dig-8{
+    background-position: left -256px;
+}
+.clock_rndrimg-dig-9{
+    background-position: left -288px;
+}

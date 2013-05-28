@@ -1,0 +1,169 @@
+body{
+    font: 20px "Trebuchet MS", sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    color: #02819F;
+    background: #E9E9E9;
+}
+h1{
+    font-size: 39px;
+    font-weight: normal;
+    margin: 15px 0;
+}
+.wrapper{
+    position: relative;
+    width: 900px;
+    height: 700px;
+    margin: 0 auto;
+    /*border: 1px solid black;*/
+}
+.ex{
+    width: 880px;
+    height: 680px;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    padding: 10px;
+    left: 0;
+    top: 0;
+    -webkit-transform: scale(0.3);
+    -webkit-transition: all 1s;
+    background: #d9d9d9;
+    -moz-box-shadow: 0px 0px 20px #000000;
+    -webkit-box-shadow: 0px 0px 20px #000000;
+    box-shadow: 0px 0px 20px #000000;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.ex:hover{
+    -webkit-transform: scale(0.33);
+    z-index: 10;
+}
+.ex.ex__active{
+    -webkit-transform: scale(1);
+    z-index: 10;
+}
+.ex__1{
+    -webkit-transform-origin: left top;
+}
+.ex__2{
+    -webkit-transform-origin: center top;
+}
+.ex__3{
+    -webkit-transform-origin: right top;
+}
+.ex__4{
+    -webkit-transform-origin: left center;
+}
+.ex__5{
+    -webkit-transform-origin: center center;
+}
+.ex__6{
+    -webkit-transform-origin: right center;
+}
+.ex__7{
+    -webkit-transform-origin: left bottom;
+}
+.ex__8{
+    -webkit-transform-origin: center bottom;
+}
+.ex__9{
+    -webkit-transform-origin: right bottom;
+}
+
+select{
+    font: 32px "Trebuchet MS", sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    color: #02819F;
+    background: #EEE;
+}
+button{
+    font-size: 20px;
+}
+textarea{
+    font-size: 24px;
+}
+input{
+    border: 1px solid #02819F;
+    background-color: #e9e9e9;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 2px #02819F;
+    -webkit-box-shadow: inset 0px 0px 2px #02819F;
+    box-shadow: inset 0px 0px 2px #02819F;
+    padding: 4px 8px;
+}
+.clock{
+    display: inline-block;
+    font-size: 34px;
+    border: 1px solid #02819F;
+    padding: 2px 5px;
+    margin: 10px 0;
+    background-color: #e9e9e9;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    -moz-box-shadow: inset 0px 0px 9px #02819F;
+    -webkit-box-shadow: inset 0px 0px 9px #02819F;
+    box-shadow: inset 0px 0px 9px #02819F;
+    /*Inner elements should not cover inner shadows*/
+    /*Chrome renders inset shadows incorrectly with border-radius*/
+    /*IE 7 AND 8 DO NOT SUPPORT INSET SHADOWS*/
+}
+pre{
+    float: left;
+    width: 100%;
+}
+pre code{
+    font-size: 22px;
+    text-align: left;
+    -moz-box-shadow: inset 0px 0px 9px #000000;
+    -webkit-box-shadow: inset 0px 0px 9px #000000;
+    box-shadow: inset 0px 0px 9px #000000;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+.scroll{
+    overflow: auto;
+    height: 100%;
+    width: 901px;
+    padding: 0 10px 0 0;
+    
+}
+.ex__1 .clock{
+    margin: 10px 0;
+}
+.ex__5 pre{
+    margin: 0;
+    float: none;
+}
+.ex__5 pre h2{
+    
+}
+.generator{
+    text-align: left;
+}
+.generator fieldset{
+    /*width: 45%;
+    float: left;*/
+}
+
+.col-left{
+    width: 49%;
+    float: left;
+}
+.col-right{
+    width: 49%;
+    float: right;
+}
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
