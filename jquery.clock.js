@@ -19,6 +19,7 @@
         this.sRndrTpl = options.sRndrTpl || options.elem.data('sRndrTpl') || 'dd;.;mm;.;yy; ;hh;:;min;:;ss';
         this.render = options.render || false;
         this.renderType = options.renderType || options.elem.data('renderType') || 'num';
+        this.renderAnim = options.renderAnim || options.elem.data('renderAnim') || false;
         this.frameHeight = options.frameHeight || options.elem.data('frameHeight') || 32;
         this.rndrItems={};
         /*render end*/
@@ -251,16 +252,11 @@
                 
                 var aTpl = self.sRndrTpl.split(';');
                 
-                var _class = 'clock_rndr__num';
-                switch (self.renderType) {
-                    case 'img':
-                        _class += ' clock_rndr__img';
-                    break;
-                }
+                var _class = 'clock_rndr__'+self.renderType;
                 
                 var template = '<div class="clock_rndr '+_class+'">';
                 
-                    if(self.renderType === 'img'){
+                    if(self.renderAnim){
                         $.each(aTpl, function(key, val){
                             switch (val) {
                                 case 'hh':
@@ -309,9 +305,9 @@
 
                 self.elem.html(template);
                 
-                if(self.renderType === 'img'){
-                    self.elem.find('.clock_rndrimg-dig-set').each(function(){
-                        $(this).height($(this).find('.clock_rndrimg-dig-set-item').length*self.frameHeight);
+                if(self.renderAnim){
+                    self.elem.find('.clock_rndr-dig-set').each(function(){
+                        $(this).height($(this).find('.clock_rndr-dig-set-item').length*self.frameHeight);
                     });
                 }
                 
@@ -341,21 +337,17 @@
                 if(!params.len){
                     params.len = 2;
                 }
-                var _class = 'clock_rndr-dig';
-                switch (self.renderType) {
-                    case 'img':
-                        _class += ' clock_rndr-dig__img';
-                    break;
-                    default:
-                        
-                    break;
+                var _class = 'clock_rndr-dig clock_rndr-dig__'+self.renderType;
+                if(self.renderAnim){
+                    _class += ' clock_rndr-dig__anim';
                 }
                 
                 var templateItem = '';
                 for (var i = 1; i <= params.len; i++) {
                     templateItem += '<div class="'+_class+'" data-part="'+params.id+'-'+i+'">';
-                        if(self.renderType === 'img'){
-                            templateItem += '<div class="clock_rndrimg-dig-set clock_rndrimg-dig-set__'+self.direction+'">';
+                        /*if(self.renderType === 'img'){*/
+                        if(self.renderAnim){
+                            templateItem += '<div class="clock_rndr-dig-set clock_rndr-dig-set__'+self.direction+'">';
                                 templateItem += itemsSet(Number(params.value.charAt(i-1)), i===1 ? params.cnt1+1 : params.cnt2+1);
                             templateItem += '</div>';
                         }else{
@@ -367,7 +359,8 @@
                 return templateItem;
                 
                 function itemsSet(start, cnt){
-                    var str = '';
+                    var str = '', 
+                        sClass = '';
                     var j = 0;
                     for (var i = 0; i < cnt; i++) {
                         j = i+start;
@@ -377,7 +370,16 @@
                         if(j>=cnt){
                             j = j-cnt;
                         }
-                        str += '<div class="clock_rndrimg-dig-set-item clock_rndrimg-dig-'+j+'"></div>';
+                        sClass = 'clock_rndr-dig-set-item';
+                        if(self.renderType === 'img'){
+                            sClass += ' clock_rndr-dig-set-item__img';
+                        }
+                        sClass += ' clock_rndr-dig-set-item__'+j;
+                        str += '<div class="'+sClass+'">';
+                        if(self.renderType === 'num'){
+                            str += j;
+                        }
+                        str += '</div>';
                     }
                     return str;
                 }
@@ -393,16 +395,13 @@
         }
         
         function _render(){
-            switch (self.renderType) {
-                case 'img':
-                    _renderImg();
-                    break;
-                default:
-                    _renderNum();
-                    break;
+            if(self.renderAnim){
+                _renderAnim();
+            }else{
+                _renderStatic();
             }
             
-            function _renderImg(){
+            function _renderAnim(){
                 
                 var dt = _createDateObj(date);
                 
@@ -435,14 +434,14 @@
                     if(self.direction === 'down'){
                         return obj.find('>div>div:first');
                     }else{
-                        return obj.find('.clock_rndrimg-dig-'+str.charAt(pos)).prev();
+                        return obj.find('.clock_rndr-dig-set-item__'+str.charAt(pos)).prev();
                     }
                 }
                 
             }
             
             
-            function _renderNum(){
+            function _renderStatic(){
                 var dt = _createDateObj(date);
                 
                 _renderItem("dd");

@@ -96,6 +96,7 @@ $('.clock_surplus').on('click', function(){
             
             <section class="ex ex__4" id="ex__4">
                 <div class="scroll">
+                    <h1>Генератор кода</h1>
                     <div class="generator" id="generator">
                         <form>
                             <fieldset>
@@ -108,13 +109,16 @@ $('.clock_surplus').on('click', function(){
                                         Часовой пояс - <input type="text" name="timeZone" value="" placeholder="4" />
                                     </label><br>
                                     <label >
-                                        Автозапуск при создании - <input type="checkbox" name="autoStart" value="true" placeholder="true" />
+                                        Автозапуск при создании - <input type="checkbox" name="autoStart" value="true" />
                                     </label><br>
                                     <label >
                                         Режим таймера - <input type="checkbox" name="timer" value="true" />
                                     </label><br>
                                     <label >
                                         Направление donw/up - <input type="text" name="direction" value="" placeholder="donw" />
+                                    </label><br>
+                                    <label >
+                                        С какого времени стартовать - <input type="text" name="startTime" value="" placeholder="0" />
                                     </label><br>
                                 </div>
                                 <div class="col-right">
@@ -123,6 +127,9 @@ $('.clock_surplus').on('click', function(){
                                     </label><br>
                                     <label >
                                         Шаблон рендера - <input type="text" name="sRndrTpl" value="" placeholder="dd.mm.yy hh:min:ss" />
+                                    </label><br>
+                                    <label >
+                                        Использовать ли анимацию - <input type="checkbox" name="renderAnim" value="true" />
                                     </label><br>
                                     <label >
                                         Тип рендера (num/img) - <input type="text" name="renderType" value="" placeholder="num" />
@@ -208,10 +215,12 @@ $('#clock').clock();
     elem        : $('#clock') /*jQuery объект (только для new)*/
     timeZone    : 4,          /*Часовой пояс*/
     autoStart   : true,       /*Автозапуск при создании*/
-    timer       : true,       /*Режим таймера*/
+    timer       : false,      /*Режим таймера*/
     direction   : "donw",     /*Направление отсчета donw/up*/
+    startTime   : 0,          /*С какого времени стартовать*/
     timeDif     : 120,        /*Разница во времени в секундах*/
     sRndrTpl    : "hh;:;min", /*Шаблон рендера*/
+    renderAnim  : false,      /*Использовать ли анимацию*/
     renderType  : "num",      /*Тип рендера num/img*/
     frameHeight : 32,         /*Высота кадра спрайта*/
     btns : {
@@ -260,7 +269,7 @@ $('#clock').clock();
 });
 </code></pre>
                     <h2>Рендер</h2>
-<p>Можно передать свой рендер, который будет вызываться каждую секунду.<br>В качестве параметра передается текущая дата.</p>
+<p>Можно передать свой рендер, который будет вызываться каждую секунду.<br>В качестве параметра передается текущая дата. Для получения корректной даты нужно использовать UTC методы, например getUTCSeconds.</p>
 <pre><code class="javascript">{
     render : function(data){},  //функция рендера
 }
@@ -269,12 +278,13 @@ $('#clock').clock();
             </section>
             
             <section class="ex ex__6" id="ex__6">
-                <h1>Рендер со спрайтом</h1>
+                <h1>Рендер со спрайтом и анимацией</h1>
                 <span class="clock" 
                     data-time-dif="5000" 
                     data-direction="down" 
                     data-timer="true"
                     data-render-type="img" 
+                    data-render-anim="true" 
                     data-auto-start="false"
                     data-s-rndr-tpl="hh;:;min;:;ss"
                     >
@@ -283,7 +293,8 @@ $('#clock').clock();
                     data-time-dif="5000" 
                     data-direction="up" 
                     data-timer="true"
-                    data-render-type="img" 
+                    data-render-type="img"
+                    data-render-anim="true" 
                     data-auto-start="false"
                     data-s-rndr-tpl="hh;:;min;:;ss"
                     >
@@ -297,6 +308,7 @@ $('#clock').clock();
     data-direction="down" 
     data-timer="true"
     data-render-type="img" 
+    data-render-anim="true" 
     data-auto-start="false"
     data-s-rndr-tpl="hh;:;min;:;ss"&gt;
 &lt;/span&gt;
@@ -308,11 +320,48 @@ $('#clock').clock();
             </section>
             
             <section class="ex ex__7" id="ex__7">
-                
+                <h1>Рендер с цифрами и анимацией</h1>
+                <span class="clock" 
+                    data-time-dif="5000" 
+                    data-direction="down" 
+                    data-timer="true"
+                    data-render-type="num" 
+                    data-render-anim="true" 
+                    data-auto-start="false"
+                    data-s-rndr-tpl="hh;:;min;:;ss"
+                    >
+                </span>
+                <span class="clock" 
+                    data-time-dif="5000" 
+                    data-direction="up" 
+                    data-timer="true"
+                    data-render-type="num"
+                    data-render-anim="true" 
+                    data-auto-start="false"
+                    data-s-rndr-tpl="hh;:;min;:;ss"
+                    >
+                </span><br>
+                <button class="clock_pause">пауза</button>
+                <button class="clock_play">плей</button>
+                <button class="clock_stop">конец</button>
+<pre><code>/*HTML*/
+&lt;span id="clock" 
+    data-time-dif="5000" 
+    data-direction="down" 
+    data-timer="true"
+    data-render-type="num" 
+    data-render-anim="true" 
+    data-auto-start="false"
+    data-s-rndr-tpl="hh;:;min;:;ss"&gt;
+&lt;/span&gt;
+</code></pre>
+<pre><code class="javascript">/*javaScript*/
+$('#clock').clock();
+</code></pre>
             </section>
             
             <section class="ex ex__8" id="ex__8">
-                
+                <h1>По всем вопросам пишите мне на <a href="mailto:gegeledanila@gmail.com">gegeledanila@gmail.com</a></h1>
             </section>
             
             <section class="ex ex__9" id="ex__9">

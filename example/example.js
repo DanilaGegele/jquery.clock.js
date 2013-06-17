@@ -5,6 +5,7 @@ $(function(){
     app.ex__2();
     app.ex__3();
     app.ex__6();
+    app.ex__7();
     new app.generator({elem : $('#generator')})
 })
 
@@ -127,10 +128,14 @@ app.generator = function(options){
                 code += '   timer :' + self.$inputs.filter('[name="timer"]').val()+',\n';
             if(self.$inputs.filter('[name="direction"]').val())
                 code += '   direction :' + self.$inputs.filter('[name="direction"]').val()+',\n';
+            if(self.$inputs.filter('[name="startTime"]').val())
+                code += '   startTime :' + self.$inputs.filter('[name="startTime"]').val()+',\n';
             if(self.$inputs.filter('[name="timeDif"]').val())
                 code += '   timeDif :' + self.$inputs.filter('[name="timeDif"]').val()+',\n';
             if(self.$inputs.filter('[name="sRndrTpl"]').val())
                 code += '   sRndrTpl : "' + self.$inputs.filter('[name="sRndrTpl"]').val()+'",\n';
+            if(self.$inputs.filter('[name="renderAnim"]:checked').val())
+                code += '   renderAnim :' + self.$inputs.filter('[name="renderAnim"]').val()+',\n';
             if(self.$inputs.filter('[name="renderType"]').val())
                 code += '   renderType : "' + self.$inputs.filter('[name="renderType"]').val()+'",\n';
             if(self.$inputs.filter('[name="frameHeight"]').val())
@@ -183,10 +188,14 @@ app.generator = function(options){
                 code += ' data-auto-start="'+self.$inputs.filter('[name="autoStart"]').val()+'"\n';    
             if(self.$inputs.filter('[name="timer"]:checked').val())
                 code += ' data-timer="'+self.$inputs.filter('[name="timer"]').val()+'"\n';    
+            if(self.$inputs.filter('[name="startTime"]').val())
+                code += ' data-start-time="' + self.$inputs.filter('[name="startTime"]').val()+'"\n';
             if(self.$inputs.filter('[name="timeDif"]').val())
                 code += ' data-time-dif="'+self.$inputs.filter('[name="timeDif"]').val()+'"\n';
             if(self.$inputs.filter('[name="sRndrTpl"]').val())
                 code += ' data-s-rndr-tpl="'+self.$inputs.filter('[name="sRndrTpl"]').val()+'"\n';
+            if(self.$inputs.filter('[name="renderAnim"]:checked').val())
+                code += ' data-render-anim="'+self.$inputs.filter('[name="renderAnim"]').val()+'"\n';    
             if(self.$inputs.filter('[name="renderType"]').val())
                 code += ' data-render-type="'+self.$inputs.filter('[name="renderType"]').val()+'"\n';
             if(self.$inputs.filter('[name="frameHeight"]').val())
@@ -210,6 +219,15 @@ app.ex__6 = function(){
             play: $('#ex__6 .clock_play'),
             pause: $('#ex__6 .clock_pause'),
             stop: $('#ex__6 .clock_stop')
+        }
+    });
+}
+app.ex__7 = function(){
+    $('#ex__7 .clock').clock({
+        btns : {
+            play: $('#ex__7 .clock_play'),
+            pause: $('#ex__7 .clock_pause'),
+            stop: $('#ex__7 .clock_stop')
         }
     });
 }

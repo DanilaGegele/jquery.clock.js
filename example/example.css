@@ -9,6 +9,9 @@ h1{
     font-weight: normal;
     margin: 15px 0;
 }
+a{
+    text-decoration: none;
+}
 .wrapper{
     position: relative;
     width: 900px;
@@ -25,8 +28,19 @@ h1{
     padding: 10px;
     left: 0;
     top: 0;
+    
+    -moz-transform: scale(0.3);
+    -ms-transform: scale(0.3);
     -webkit-transform: scale(0.3);
+    -o-transform: scale(0.3);
+    transform: scale(0.3);
+
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
     -webkit-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+
     background: #d9d9d9;
     -moz-box-shadow: 0px 0px 20px #000000;
     -webkit-box-shadow: 0px 0px 20px #000000;
@@ -37,39 +51,85 @@ h1{
     overflow: hidden;
 }
 .ex:hover{
+    -moz-transform: scale(0.33);
+    -ms-transform: scale(0.33);
     -webkit-transform: scale(0.33);
+    -o-transform: scale(0.33);
+    transform: scale(0.33);
+    
     z-index: 10;
 }
 .ex.ex__active{
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
     -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+
     z-index: 10;
 }
 .ex__1{
+    -moz-transform-origin: left top;
+    -ms-transform-origin: left top;
     -webkit-transform-origin: left top;
+    -o-transform-origin: left top;
+    transform-origin: left top;
 }
 .ex__2{
+    -moz-transform-origin: center top;
+    -ms-transform-origin: center top;
     -webkit-transform-origin: center top;
+    -o-transform-origin: center top;
+    transform-origin: center top;
 }
 .ex__3{
+    -moz-transform-origin: right top;
+    -ms-transform-origin: right top;
     -webkit-transform-origin: right top;
+    -o-transform-origin: right top;
+    transform-origin: right top;
 }
 .ex__4{
+    -moz-transform-origin: left center;
+    -ms-transform-origin: left center;
     -webkit-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
 }
 .ex__5{
+    -moz-transform-origin: center center;
+    -ms-transform-origin: center center;
     -webkit-transform-origin: center center;
+    -o-transform-origin: center center;
+    transform-origin: center center;
 }
 .ex__6{
+    -moz-transform-origin: right center;
+    -ms-transform-origin: right center;
     -webkit-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center;
 }
 .ex__7{
+    -moz-transform-origin: left bottom;
+    -ms-transform-origin: left bottom;
     -webkit-transform-origin: left bottom;
+    -o-transform-origin: left bottom;
+    transform-origin: left bottom;
 }
 .ex__8{
+    -moz-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
     -webkit-transform-origin: center bottom;
+    -o-transform-origin: center bottom;
+    transform-origin: center bottom;
 }
 .ex__9{
+    -moz-transform-origin: right bottom;
+    -ms-transform-origin: right bottom;
     -webkit-transform-origin: right bottom;
+    -o-transform-origin: right bottom;
+    transform-origin: right bottom;
 }
 
 select{
