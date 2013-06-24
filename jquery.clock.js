@@ -260,7 +260,7 @@
                         $.each(aTpl, function(key, val){
                             switch (val) {
                                 case 'hh':
-                                    template += _generateTplItem({id:'hh', value:dt.hh, cnt1:2, cnt2:3});
+                                    template += _generateTplItem({id:'hh', value:dt.hh, cnt1:2, cnt2:9});
                                 break;
                                 case 'min':
                                     template += _generateTplItem({id:'min', value:dt.min, cnt1:5, cnt2:9});
